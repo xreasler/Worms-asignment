@@ -3,7 +3,9 @@ guid: 9a42ffc4161bc084586c8a73ffdd8985
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - blood: {instanceID: 0}
+  - spark: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

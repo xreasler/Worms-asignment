@@ -1,4 +1,6 @@
+using System;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class Gun : MonoBehaviour
 {
@@ -6,13 +8,14 @@ public class Gun : MonoBehaviour
     public AudioClip outOfAmmo;
     public AudioClip fire;
     
+    
     public enum ShootState {
         Ready,
         Shooting,
         Reloading
     }
 
-    // How far forward the muzzle is from the centre of the gun
+   
    private float muzzleOffset;
 
     [Header("Magazine")]
@@ -24,25 +27,24 @@ public class Gun : MonoBehaviour
     private int remainingAmmunition;
 
     [Header("Shooting")]
-    // How many shots the gun can make per second
+    
     [Range(0.25f, 25)] public float fireRate;
 
-    // The number of rounds fired each shot
+    
     public int roundsPerShot;
 
     [Range(0.5f, 100)] public float roundSpeed;
 
-    // The maximum angle that the bullet's direction can vary,
-    // in both the horizontal and vertical axes
+    
     [Range(0, 45)] public float maxRoundVariation;
 
     private ShootState shootState = ShootState.Ready;
 
-    // The next time that the gun is able to shoot at
+    
     private float nextShootTime = 0;
 
     void Start() {
-        //muzzleOffset = GetComponent<Renderer>().bounds.extents.z;
+        
         remainingAmmunition = ammunition;
     }
 
@@ -80,6 +82,8 @@ public class Gun : MonoBehaviour
                     
                    
                 );
+                
+                
 
                 // Add a random variation to the round's direction
                 spawnedRound.transform.Rotate(new Vector3(
@@ -101,6 +105,8 @@ public class Gun : MonoBehaviour
             }
         }
     }
+
+   
 
     /// Attempts to reload the gun
     public void Reload() {
