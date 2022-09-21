@@ -7,6 +7,7 @@ public class Gun : MonoBehaviour
 
     public AudioClip outOfAmmo;
     public AudioClip fire;
+    public Transform muzzleflash;
     
     
     public enum ShootState {
@@ -74,6 +75,7 @@ public class Gun : MonoBehaviour
                 // Instantiates the round at the muzzle position
                 Debug.Log("Trying to shoot");
                 AudioSource.PlayClipAtPoint(fire, transform.position);
+                //Instantiate(muzzleflash, transform.position, Quaternion.identity);
                 TurnManager.GetInstance().TriggerChangeTurn();
                 GameObject spawnedRound = Instantiate(
                     round,
