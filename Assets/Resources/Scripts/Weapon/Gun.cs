@@ -72,6 +72,7 @@ public class Gun : MonoBehaviour
                 // Instantiates the round at the muzzle position
                 Debug.Log("Trying to shoot");
                 AudioSource.PlayClipAtPoint(fire, transform.position);
+                TurnManager.GetInstance().TriggerChangeTurn();
                 GameObject spawnedRound = Instantiate(
                     round,
                     transform.position + transform.forward * muzzleOffset,

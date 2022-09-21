@@ -10,9 +10,8 @@ public class Locomotion : MonoBehaviour
     public float turnspeed = 300f;
     private Vector2 _playerDirection;
     Vector3 raycastOffset;
-    public bool grounded = false;
     public Animator anim;
-    public float JumpForce;
+    public float speed;
     
 
     private GameObject player;
@@ -73,6 +72,13 @@ public class Locomotion : MonoBehaviour
             rb.velocity = inputVector * moveSpeed;  
             
             rb.velocity += transform.forward * Mathf.Clamp(ForwardInput, -1f, 1f) * moveSpeed;
+            
+            if (Input.GetKey("a")) {
+                rb.AddForce (-Vector3.right * speed * Time.deltaTime);
+            }
+            if (Input.GetKey("d")) {
+                rb.AddForce (Vector3.right * speed * Time.deltaTime);
+            }
             
             
 
