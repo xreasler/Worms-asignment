@@ -7,6 +7,7 @@ public class InputController : MonoBehaviour
 {
     private Locomotion charController;
     private Animator anim;
+   
 
     void Awake()
     {
@@ -16,14 +17,20 @@ public class InputController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        // Get input values
         
-        int vertical = Mathf.RoundToInt(Input.GetAxisRaw("Vertical"));
-        int horizontal = Mathf.RoundToInt(Input.GetAxisRaw("Horizontal"));
-        bool jump = Input.GetKey(KeyCode.Space);
-        charController.ForwardInput = vertical;
-        charController.TurnInput = horizontal;
-        charController.JumpInput = jump;
+        
+        
+       
+        
+            int vertical = Mathf.RoundToInt(Input.GetAxisRaw("Vertical"));
+            int horizontal = Mathf.RoundToInt(Input.GetAxisRaw("Horizontal"));
+            bool jump = Input.GetKey(KeyCode.Space);
+            charController.ForwardInput = vertical;
+            charController.TurnInput = horizontal;
+            charController.JumpInput = jump;
+        
+        
+        
         
     }
     

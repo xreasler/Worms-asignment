@@ -76,7 +76,7 @@ public class Gun : MonoBehaviour
                 Debug.Log("Trying to shoot");
                 AudioSource.PlayClipAtPoint(fire, transform.position);
                 //Instantiate(muzzleflash, transform.position, Quaternion.identity);
-                TurnManager.GetInstance().TriggerChangeTurn();
+                //TurnManager.GetInstance().TriggerChangeTurn();
                 GameObject spawnedRound = Instantiate(
                     round,
                     transform.position + transform.forward * muzzleOffset,

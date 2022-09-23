@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Cinemachine;
 using UnityEngine;
 
 public class TurnManager : MonoBehaviour
@@ -12,6 +13,12 @@ public class TurnManager : MonoBehaviour
     private int currentPlayerIndex;
     private bool waitingForNextTurn;
     private float turnDelay;
+    
+    [SerializeField] private float starttime = 15f;
+    [SerializeField] private float repeattime = 20f;
+    
+    public CinemachineFreeLook  cam1;
+    public CinemachineFreeLook  cam2;
 
     private void Awake()
     {
@@ -21,6 +28,10 @@ public class TurnManager : MonoBehaviour
             currentPlayerIndex = 1;
             playerOne.SetPlayerTurn(1);
             playerTwo.SetPlayerTurn(2);
+            InvokeRepeating("TriggerChangeTurn", starttime, repeattime);
+            
+            cam1.enabled = true;
+            cam2.enabled = false; 
         }
     }
 
@@ -64,10 +75,12 @@ public class TurnManager : MonoBehaviour
         if (currentPlayerIndex == 1)
         {
             currentPlayerIndex = 2;
+            cam2.enabled = !cam2.enabled;
         }
         else if (currentPlayerIndex == 2)
         {
             currentPlayerIndex = 1;
+            cam1.enabled = !cam1.enabled;
         }
     }
 }
