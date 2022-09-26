@@ -13,6 +13,7 @@ public class Target : MonoBehaviour {
         if(health <= 0) {
             AudioSource.PlayClipAtPoint(death, transform.position);
             Destroy(gameObject);
+            SwitchManager.instance.GameOver();
         }
     }
 
@@ -21,5 +22,12 @@ public class Target : MonoBehaviour {
         health -= damage;
         AudioSource.PlayClipAtPoint(hurt, transform.position);
     }
+
+    public float GetHealth()
+    {
+        return health;
+    }
+
+    
     
 }

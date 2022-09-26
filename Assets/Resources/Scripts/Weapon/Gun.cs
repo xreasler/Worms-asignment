@@ -21,11 +21,11 @@ public class Gun : MonoBehaviour
 
     [Header("Magazine")]
     public GameObject round;
-    [SerializeField] int ammunition;
+    public int ammunition;
 
     [Range(0.5f, 10)] public float reloadTime;
 
-    private int remainingAmmunition;
+    public int remainingAmmunition;
 
     [Header("Shooting")]
     

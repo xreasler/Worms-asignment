@@ -32,6 +32,8 @@ public class Locomotion : MonoBehaviour
         capsuleCollider = rb.GetComponent<CapsuleCollider>();
         Cursor.lockState = CursorLockMode.Locked;
         player = gameObject;
+        
+        rb.AddForce(-transform.up);
        
 
 
