@@ -8,12 +8,14 @@ public class AnimatorController : MonoBehaviour
 
     bool IsWalking; 
     bool IsJumping;
+    bool IsShooting;
     
     void Start()
     {
         _animator = GetComponent<Animator>();
         IsWalking = false;
         IsJumping = false;
+        IsShooting = false;
 
     }
 
@@ -23,6 +25,7 @@ public class AnimatorController : MonoBehaviour
         if (Input.GetKey(KeyCode.W))
         {
             //Set the "Jump" parameter in the Animator Controller to true
+            Debug.Log("am i walking?");
             _animator.SetBool("IsWalking", true);
             //Check to see if the "Crouch" parameter is enabled
             
@@ -39,5 +42,13 @@ public class AnimatorController : MonoBehaviour
         }
         //Otherwise the "Jump" parameter should be false
         else _animator.SetBool("IsJumping", false);
+
+        if (Input.GetMouseButton(0))
+        {
+            _animator.SetBool("IsShooting", true);
+        }
+        else _animator.SetBool("IsShooting", false);
+        
+            
     }
 }

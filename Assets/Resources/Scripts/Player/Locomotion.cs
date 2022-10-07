@@ -12,6 +12,10 @@ public class Locomotion : MonoBehaviour
     Vector3 raycastOffset;
     public Animator anim;
     public float speed;
+    public Vector3 jump;
+    public float jumpForce = 2.0f;
+     
+    public bool isGrounded;
     
 
     private GameObject player;
@@ -34,6 +38,7 @@ public class Locomotion : MonoBehaviour
         player = gameObject;
         
         rb.AddForce(-transform.up);
+        jump = new Vector3(0.0f, 20.0f, 0.0f);
        
 
 
@@ -45,9 +50,26 @@ public class Locomotion : MonoBehaviour
     void FixedUpdate()
     {      
         ProcessAction();
-        
-       
-        
+        if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
+        {
+
+            rb.AddForce(jump * jumpForce, ForceMode.Impulse);
+            isGrounded = false;
+            Invoke("ForceDown", 0.1f);
+            Invoke("ReturnGrav", 1f);
+            
+            
+        }
+
+    }
+
+    void ForceDown()
+    {
+        Physics.gravity = new Vector3(0, -900.0F, 0);
+    }
+    void ReturnGrav()
+    {
+        Physics.gravity = new Vector3(0, -9.0F, 0);
     }
     
     
@@ -86,7 +108,11 @@ public class Locomotion : MonoBehaviour
 
            
     
-    } 
+    }
+    void OnCollisionStay()
+    {
+        isGrounded = true;
+    }
     
     
 

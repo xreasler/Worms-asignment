@@ -8,7 +8,7 @@ public class RandomPickup : MonoBehaviour
     public GameObject[] prefabs = new GameObject[9];
     private void Start()
     {
-        InvokeRepeating("Spawn", 5.0f, 50f);
+        InvokeRepeating("Spawn", 5f, 25f);
     }
     public void Spawn () 
     {

@@ -7,6 +7,8 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 using Debug = UnityEngine.Debug;
+using UnityEngine.SceneManagement;
+
 
 public class SwitchManager : MonoBehaviour
 {
@@ -32,6 +34,10 @@ public class SwitchManager : MonoBehaviour
     public GameObject player1;
     public GameObject player2;
 
+    public GameObject gameOverMenu;
+    public bool isGameOver;
+    
+
     public TMP_Text time;
     public bool timesUp = false;
     public float elapsedTime = 0;
@@ -41,6 +47,10 @@ public class SwitchManager : MonoBehaviour
     public TMP_Text hp_02;
 
     public TMP_Text ammo;
+    public TMP_Text pTurn;
+
+
+    
     
 
     [SerializeField] private float startTime = 15f;
@@ -55,8 +65,18 @@ public class SwitchManager : MonoBehaviour
 
     public void GameOver()
     {
-        Time.timeScale = 0;
         
+        gameOverMenu.SetActive(true);
+        Time.timeScale = 0f;
+        isGameOver = true;
+        MenuHandler.Instance.mainMenu.SetActive(true);
+        gameOverMenu.SetActive(false);
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+        LoadMenuScene();
+
+        
+
 
     }
 
@@ -66,28 +86,51 @@ public class SwitchManager : MonoBehaviour
     {
       cam1.enabled = true;
       cam2.enabled = false;  
+      gameOverMenu.SetActive(false);
+      MenuHandler.Instance.mainMenu.SetActive(false);
+      Time.timeScale = 1f;
       
-      InvokeRepeating("Switch", startTime, repeatTime);
-      
+      isGameOver = false;
+
+      //InvokeRepeating("Switch", startTime, repeatTime);
+
+    }
+
+    public void MoreTime()
+    {
+        elapsedTime = 0;
     }
 
     
     void Update()
     {
 
-        elapsedTime += Time.deltaTime;
-        if(elapsedTime >= timerTarget) {
-            timesUp = true;
-            elapsedTime = 0;
-        }
+        
+        
+           
+            elapsedTime += Time.deltaTime;
+            if(elapsedTime >= timerTarget) 
+            {
+                Switch();
+                elapsedTime = 0;
+               
+            }
+        
+
+           
+
+       
+        
+        
 
 
         time.text = elapsedTime.ToString("TIMER:  "+ "0");
-        hp_01.text = GameObject.Find("Player1").GetComponent<Target>().health.ToString("Cops HP:   " + "0");
-        hp_02.text = GameObject.Find("Player2").GetComponent<Target>().health.ToString("Banker HP:   " + "0");
+        hp_01.text = GameObject.Find("Player1").GetComponent<Target>().health.ToString("Cowboy HP:   " + "0");
+        hp_02.text = GameObject.Find("Player2").GetComponent<Target>().health.ToString("Police HP:   " + "0");
 
-        ammo.text = GameObject.Find("GunEnd").GetComponent<Gun>().remainingAmmunition.ToString("0");
         
+        
+
 
 
 
@@ -118,6 +161,16 @@ public class SwitchManager : MonoBehaviour
         
         
     }
+    
+    public void LoadMenuScene()
+    {
+       Debug.Log("Loading Main menu");
+        SceneManager.LoadScene("MainMenu");
+    }
+   
+    
+
+    
 
     
 }

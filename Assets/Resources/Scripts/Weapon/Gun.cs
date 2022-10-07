@@ -8,6 +8,7 @@ public class Gun : MonoBehaviour
     public AudioClip outOfAmmo;
     public AudioClip fire;
     public Transform muzzleflash;
+    public GameObject me;
     
     
     public enum ShootState {
@@ -49,17 +50,21 @@ public class Gun : MonoBehaviour
         remainingAmmunition = ammunition;
     }
 
-    void Update() {
-        switch(shootState) {
+    void Update() 
+    {
+        switch(shootState) 
+        {
             case ShootState.Shooting:
                 // If the gun is ready to shoot again...
-                if(Time.time > nextShootTime) {
+                if(Time.time > nextShootTime) 
+                {
                     shootState = ShootState.Ready;
                 }
                 break;
             case ShootState.Reloading:
                 // If the gun has finished reloading...
-                if(Time.time > nextShootTime) {
+                if(Time.time > nextShootTime) 
+                {
                     remainingAmmunition = ammunition;
                     shootState = ShootState.Ready;
                 }
@@ -70,7 +75,8 @@ public class Gun : MonoBehaviour
     /// Attempts to fire the gun
     public void Shoot() {
         // Checks that the gun is ready to shoot
-        if(shootState == ShootState.Ready) {
+        if(shootState == ShootState.Ready) 
+        {
             for(int i = 0; i < roundsPerShot; i++) {
                 // Instantiates the round at the muzzle position
                 Debug.Log("Trying to shoot");
@@ -99,10 +105,12 @@ public class Gun : MonoBehaviour
             }
 
             remainingAmmunition--;
-            if(remainingAmmunition > 0) {
+            if(remainingAmmunition > 0) 
+            {
                 nextShootTime = Time.time + (1 / fireRate);
                 shootState = ShootState.Shooting;
-            } else {
+            } else 
+            {
                 Reload();
             }
         }
@@ -117,6 +125,7 @@ public class Gun : MonoBehaviour
             if (shootState == ShootState.Ready)
             {
                 AudioSource.PlayClipAtPoint(outOfAmmo, transform.position);
+                
                 nextShootTime = Time.time + reloadTime;
                 shootState = ShootState.Reloading;
             }

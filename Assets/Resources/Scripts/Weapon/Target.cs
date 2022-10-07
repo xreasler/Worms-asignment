@@ -5,6 +5,7 @@ public class Target : MonoBehaviour {
     public AudioClip hurt;
     public AudioClip death;
     
+    
 
     
     
@@ -18,14 +19,15 @@ public class Target : MonoBehaviour {
     }
 
     /// 'Hits' the target for a certain amount of damage
-    public void Hit(float damage) {
+    public void Hit(float damage) 
+    {
         health -= damage;
         AudioSource.PlayClipAtPoint(hurt, transform.position);
     }
 
-    public float GetHealth()
+    public void GetHealth(float hpPickup)
     {
-        return health;
+        health += hpPickup;
     }
 
     
