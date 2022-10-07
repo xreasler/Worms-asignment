@@ -92,7 +92,7 @@ public class SwitchManager : MonoBehaviour
       
       isGameOver = false;
 
-      //InvokeRepeating("Switch", startTime, repeatTime);
+      Invoke("Switch", 1f);
 
     }
 
