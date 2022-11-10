@@ -1,0 +1,4 @@
+# Worms-asignment
+Worms
+
+MUST BE PLAYED IN ASPECT RATIO HD IN EDITOR
